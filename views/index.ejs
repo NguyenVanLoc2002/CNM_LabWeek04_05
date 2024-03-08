@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="header">
+      <form method="post" action="/save" enctype="multipart/form-data">
+        <label for="sub_id">Mã môn:</label>
+        <input name="sub_id" placeholder="Nhập mã môn" />
+        <label for="name">Tên môn học:</label>
+        <input name="name" placeholder="Nhập tên môn học" />
+        <label for="course_type">Loại môn học:</label>
+        <input name="course_type" placeholder="Nhập loại môn học" />
+        <label for="semester">Học kì:</label>
+        <input name="semester" placeholder="Nhập học kỳ" />
+        <label for="department">Tên khoa:</label>
+        <input name="department" placeholder="Nhập tên khoa" />
+        <label for="image">Chọn ảnh:</label>
+        <input name="image" type="file" accept="image/*" />
+
+        <input type="submit" value="Lưu" />
+      </form>
+    </div>
+    <div class="content">
+      <form method="post" action="/deleted" enctype="multipart/form-data">
+        <table>
+          <caption>
+            Danh sách các môn học
+          </caption>
+          <thead>
+            <tr>
+              <th>Mã môn học</th>
+              <th>Tên môn học</th>
+              <th>Loại môn học</th>
+              <th>Học kỳ</th>
+              <th>Khoa</th>
+              <th>Ảnh</th>
+              <th>Chọn</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% data.forEach(item=>{ %>
+            <tr>
+              <td><%= item.sub_id %></td>
+              <td><%= item.name %></td>
+              <td><%= item.course_type %></td>
+              <td><%= item.semester %></td>
+              <td><%= item.department %></td>
+              <td>
+                <img
+                  src="<%=item.image%>"
+                  alt="Ảnh môn học"
+                  style="width: 100px; height: 100px"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  name="selectedCourses"
+                  value="<%= item.sub_id %>"
+                />
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <input type="submit" value="xóa" style="padding: 10px" />
+      </form>
+    </div>
+  </body>
+</html>
